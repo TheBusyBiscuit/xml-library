@@ -1,0 +1,14 @@
+{
+  "name": "xml4js",
+  "version": "0.0.1",
+  "description": "A library that can perform XML > JSON and JSON > XML parsing",
+  "main": "lib.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "xml"
+  ],
+  "author": "TheBusyBiscuit",
+  "license": "MIT"
+}
