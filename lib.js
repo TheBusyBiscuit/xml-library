@@ -108,58 +108,6 @@ module.exports.parseXML = function(xml, callback) {
     callback(null, json);
 }
 
-module.exports.parseJSON = function(json, callback) {
-    if (!(json instanceof XMLNode)) {
-        callback(new TypeError("'json' must be of type 'XMLNode'"), null);
-        return;
-    }
-
-    let xml = "";
-    let level = 0;
-
-    addNode(json, function() {
-        xml += "</" + json.name + ">\n";
-    });
-
-    function addNode(node, cb) {
-        for (let x = 0; x < level * 2; x++) {
-            xml += " ";
-        }
-        xml += "<" + node.name;
-
-        for (let key in node.attributes) {
-            xml += " " + key + "=\"" + node.attributes[key] + "\"";
-        }
-        xml += ">";
-
-        if (node.hasOwnProperty("value")) {
-            xml += node.value;
-        }
-
-        if (Object.keys(node.elements).length > 0) {
-            xml += "\n";
-        }
-
-        for (let child in node.elements) {
-            level++;
-            addNode(node.elements[child], function() {
-                if (Object.keys(node.elements[child].elements).length > 0) {
-                    for (let x = 0; x < level * 2; x++) {
-                        xml += " ";
-                    }
-                }
-
-                level--;
-                xml += "</" + node.elements[child].name + ">\n";
-            });
-        }
-
-        cb();
-    }
-
-    callback(null, xml);
-}
-
 module.exports.XMLNode = XMLNode;
 
 var XMLNode = class XMLNode {
@@ -241,6 +189,73 @@ var XMLNode = class XMLNode {
         else {
             this.value = value;
         }
+    }
+
+    asXMLString(options, callback) {
+        let json = this;
+
+        if (options == null) {
+            options = defaultOptions();
+        }
+        else if (options instanceof Function) {
+            callback = options;
+            options = defaultOptions();
+        }
+        else {
+            if (!options.hasOwnProperty("indent")) options.indent = 2;
+            if (!options.hasOwnProperty("new_lines")) options.new_lines = true;
+        }
+
+        let xml = "";
+        let level = 0;
+
+        addNode(json, function() {
+            xml += "</" + json.name + ">" + (options.new_lines ? "\n": "");
+        });
+
+        function defaultOptions() {
+            return {
+                indent: 2,
+                new_lines: true
+            };
+        }
+        function addNode(node, cb) {
+            for (let x = 0; x < level * options.indent; x++) {
+                xml += " ";
+            }
+            xml += "<" + node.name;
+
+            for (let key in node.attributes) {
+                xml += " " + key + "=\"" + node.attributes[key] + "\"";
+            }
+            xml += ">";
+
+            if (node.hasOwnProperty("value")) {
+                xml += node.value;
+            }
+
+            if (Object.keys(node.elements).length > 0 && options.new_lines) {
+                xml += "\n";
+            }
+
+            for (let child in node.elements) {
+                level++;
+                addNode(node.elements[child], function() {
+                    if (Object.keys(node.elements[child].elements).length > 0) {
+                        for (let x = 0; x < level * options.indent; x++) {
+                            xml += " ";
+                        }
+                    }
+
+                    level--;
+                    xml += "</" + node.elements[child].name + ">" + (options.new_lines ? "\n": "");
+                });
+            }
+
+            cb();
+        }
+
+        callback(null, xml);
     }
 
 }
