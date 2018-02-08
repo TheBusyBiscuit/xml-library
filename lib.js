@@ -1,3 +1,5 @@
+// Copyright (c) 2018 TheBusyBiscuit
+
 /**
  *   Parses XML text and outputs a JSON XMLNode object
  *
