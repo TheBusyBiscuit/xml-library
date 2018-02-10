@@ -323,8 +323,13 @@ class XMLNode {
             if (!options.hasOwnProperty("header")) options.header = true;
         }
 
-        let xml = options.header ? "<?xml version=\"1.0\" encoding=\"UTF-8\"?>": "";
+        let xml = "";
         let level = 0;
+
+        if (options.header) {
+            xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+            if (options.new_lines) xml += "\n";
+        }
 
         /** Add this node aka our root in this case */
         addNode(json, function() {
