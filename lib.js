@@ -320,14 +320,14 @@ class XMLNode {
         else {
             if (!options.hasOwnProperty("indent")) options.indent = 2;
             if (!options.hasOwnProperty("new_lines")) options.new_lines = true;
-            if (!options.hasOwnProperty("header")) options.header = true;
+            if (!options.hasOwnProperty("header")) options.header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
         }
 
         let xml = "";
         let level = 0;
 
         if (options.header) {
-            xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+            xml = options.header;
             if (options.new_lines) xml += "\n";
         }
 
