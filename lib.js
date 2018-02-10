@@ -168,11 +168,8 @@ module.exports.parseXML = function(xml, callback) {
     callback(null, json);
 }
 
-/** Export our class to be used when importing this module */
-module.exports.XMLNode = XMLNode;
-
 /** Our XML Node class, that can contain a value, attributes and children (of type XMLNode) */
-var XMLNode = class XMLNode {
+class XMLNode {
 
     /**
      *   Constructor for a new XML Node
@@ -402,3 +399,6 @@ var XMLNode = class XMLNode {
     }
 
 }
+
+/** Export our class to be used when importing this module */
+module.exports.XMLNode = XMLNode;
