@@ -177,7 +177,7 @@ var XMLNode = class XMLNode {
     /**
      *   Constructor for a new XML Node
      *   @param {String} name       The node's name
-     *   @param {Object} [attributes] The node's attributes
+     *   @param {Object|String} [attributes] The node's attributes or value (if it's a String)
      *   @param {Object} [children]   Be careful with this one, refer to XMLNode#addChild(node: XMLNode) instead
      */
     constructor(name, attributes, children) {
@@ -185,6 +185,10 @@ var XMLNode = class XMLNode {
 
         /** 'this.attributes' has to be a proper JSON Object */
         if (attributes instanceof Object) this.attributes = attributes;
+        else if (attributes instanceof String || typeof(attributes) === "string") {
+            this.attributes = {};
+            this.value = attributes;
+        }
         else this.attributes = {};
 
         /** 'this.elements' has to be a proper JSON Object */
