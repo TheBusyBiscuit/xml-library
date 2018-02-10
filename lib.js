@@ -320,9 +320,10 @@ class XMLNode {
         else {
             if (!options.hasOwnProperty("indent")) options.indent = 2;
             if (!options.hasOwnProperty("new_lines")) options.new_lines = true;
+            if (!options.hasOwnProperty("header")) options.header = true;
         }
 
-        let xml = "";
+        let xml = options.header ? "<?xml version=\"1.0\" encoding=\"UTF-8\"?>": "";
         let level = 0;
 
         /** Add this node aka our root in this case */
@@ -337,6 +338,7 @@ class XMLNode {
         function defaultOptions() {
             return {
                 indent: 2,
+                header: true,
                 new_lines: true
             };
         }
