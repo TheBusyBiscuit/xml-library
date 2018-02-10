@@ -318,9 +318,11 @@ class XMLNode {
         }
         /** Fill in missing options */
         else {
-            if (!options.hasOwnProperty("indent")) options.indent = 2;
-            if (!options.hasOwnProperty("new_lines")) options.new_lines = true;
-            if (!options.hasOwnProperty("header")) options.header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+            let defaults = defaultOptions();
+            if (!options.hasOwnProperty("indent")) options.indent = defaults.indent;
+            if (!options.hasOwnProperty("new_lines")) options.new_lines = defaults.new_lines;
+            if (!options.hasOwnProperty("quote_content")) options.quote_content = defaults.quote_content;
+            if (!options.hasOwnProperty("header")) options.header = defaults.header;
         }
 
         let xml = "";
@@ -343,7 +345,8 @@ class XMLNode {
         function defaultOptions() {
             return {
                 indent: 2,
-                header: true,
+                header: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+                quote_content: true,
                 new_lines: true
             };
         }
@@ -370,7 +373,8 @@ class XMLNode {
 
             /** Adding the node's value (if it has one) */
             if (node.hasOwnProperty("value")) {
-                xml += node.value;
+                if (options.quote_content) xml += "\"" + node.value + "\"";
+                else xml += node.value;
             }
 
             /** Append a new line, if there are children following this (and if the options allow us to do so) */
