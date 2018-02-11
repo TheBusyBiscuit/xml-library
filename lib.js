@@ -1,3 +1,5 @@
+'use strict'
+
 // Copyright (c) 2018 TheBusyBiscuit
 
 /**
@@ -346,7 +348,7 @@ class XMLNode {
             return {
                 indent: 2,
                 header: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-                quote_content: true,
+                quote_content: false,
                 new_lines: true
             };
         }
