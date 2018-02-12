@@ -1,5 +1,5 @@
 {
-  "name": "xml4js",
+  "name": "xml-library",
   "version": "0.0.3",
   "description": "A library that can perform XML > JSON and JSON > XML parsing",
   "main": "lib.js",
@@ -13,11 +13,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/TheBusyBiscuit/XML4JS"
+    "url": "https://github.com/TheBusyBiscuit/xml-library"
   },
   "author": "TheBusyBiscuit",
   "license": "MIT",
   "bugs": {
-      "url": "https://github.com/TheBusyBiscuit/XML4JS/issues"
+      "url": "https://github.com/TheBusyBiscuit/xml-library/issues"
   }
 }
