@@ -11,6 +11,13 @@
 	"json",
 	"parser"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheBusyBiscuit/XML4JS"
+  },
   "author": "TheBusyBiscuit",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+      "url": "https://github.com/TheBusyBiscuit/XML4JS/issues"
+  }
 }
