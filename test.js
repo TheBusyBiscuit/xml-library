@@ -1,4 +1,4 @@
-const lib = require('./lib.js');
+const lib = require('./src/lib.js');
 const FileSystem = require('fs');
 
 FileSystem.readdir("tests", function(err, files) {
