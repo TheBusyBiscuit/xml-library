@@ -179,8 +179,13 @@ class XMLNode {
      *   @param {Object|String} [attributes] The node's attributes or value (if it's a String)
      *   @param {Object} [children]   Be careful with this one, refer to XMLNode#addChild(node: XMLNode) instead
      */
-    constructor(name, attributes, children) {
-        this.name = name;
+    constructor(name, attributes, children, value) {
+        if (name instanceof String || typeof(name) === "string") {
+            this.name = name;
+        }
+        else {
+            throw new TypeError("XMLNodes need a valid 'name'");
+        }
 
         /** 'this.attributes' has to be a proper JSON Object */
         if (attributes instanceof Object) this.attributes = attributes;
@@ -192,29 +197,45 @@ class XMLNode {
 
         /** 'this.elements' has to be a proper JSON Object */
         if (children instanceof Object) this.elements = children;
+        else if (children instanceof String || typeof(children) === "string") {
+            this.elements = {};
+            this.value = children;
+        }
         else this.elements = {};
+
+        if (value instanceof String || typeof(value) === "string") {
+            this.value = value;
+        }
     }
 
     /**
      *   Append another XMLNode to be this Node's child
-     *   @param {XMLNode} node The Child Node
+     *   @param {XMLNode|XMLNode[]} node The Child Node
      */
     addChild(node) {
-        /** 'node' must be of type 'XMLNode' */
-        if (!(node instanceof XMLNode)) {
-            throw new TypeError("'node' must be of type 'XMLNode'");
+        /** In case we are adding multiple children at once */
+        if (node instanceof Array) {
+            for (var i in node) {
+                addChild(node[i]);
+            }
         }
+        else {
+            /** 'node' must be of type 'XMLNode' */
+            if (!(node instanceof XMLNode)) {
+                throw new TypeError("'node' must be of type 'XMLNode'");
+            }
 
-        /**
-         *   Assign this node a unique id, to be identified by
-         */
-        let index = 0;
+            /**
+             *   Assign this node a unique id, to be identified by
+             */
+            let index = 0;
 
-        while(this.elements.hasOwnProperty(node.name + "[" + index + "]")) {
-            index++;
+            while(this.elements.hasOwnProperty(node.name + "[" + index + "]")) {
+                index++;
+            }
+
+            this.elements[node.name + "[" + index + "]"] = node;
         }
-
-        this.elements[node.name + "[" + index + "]"] = node;
     }
 
     /**
@@ -236,6 +257,45 @@ class XMLNode {
         }
 
         this.elements[path] = node;
+    }
+
+    /**
+     *   Set a node's attribute, or delete it if 'value' is null
+     *   @param {String} key The attribute's key
+     *   @param {String} value The value you want to set
+        */
+    setAttribute(key, value) {
+        if (!(key instanceof String || typeof(key) === "string")) {
+            throw new TypeError("'key' must be of type 'String'");
+        }
+
+        /** 'value' is null, so we delete our attribute */
+        if (value == null) {
+            delete this.attributes[key];
+        }
+        else if (!(value instanceof String || typeof(value) === "string")) {
+            throw new TypeError("'value' must be of type 'String'");
+        }
+        else {
+            this.attributes[key] = value;
+        }
+    }
+
+    /**
+     *   Set a node's value, or delete it if 'value' is null
+     *   @param {String} value The value you want to set
+     */
+    setValue(value) {
+        /** 'value' is null, so we delete our value */
+        if (value == null) {
+            delete this.value;
+        }
+        else if (!(value instanceof String || typeof(value) === "string")) {
+            throw new TypeError("'value' must be of type 'String'");
+        }
+        else {
+            this.value = value;
+        }
     }
 
     /**
@@ -273,35 +333,6 @@ class XMLNode {
     }
 
     /**
-     *   Set a node's attribute, or delete it if 'value' is null
-     *   @param {String} key The attribute's key
-     *   @param {String} value The value you want to set
-        */
-    setAttribute(key, value) {
-        /** 'value' is null, so we delete our attribute */
-        if (value == null) {
-            delete this.attributes[key];
-        }
-        else {
-            this.attributes[key] = value;
-        }
-    }
-
-    /**
-     *   Set a node's value, or delete it if 'value' is null
-     *   @param {String} value The value you want to set
-     */
-    setValue(value) {
-        /** 'value' is null, so we delete our value */
-        if (value == null) {
-            delete this.value;
-        }
-        else {
-            this.value = value;
-        }
-    }
-
-    /**
      *   Returns an XML String that represents this node's data structure
      *   @param  {Object|Function}   options  Options for the output (e.g. indent, new_lines)
      *   @param  {Function} callback A callback that returns an error (if thrown) and a generated XML String
@@ -323,7 +354,6 @@ class XMLNode {
             let defaults = defaultOptions();
             if (!options.hasOwnProperty("indent")) options.indent = defaults.indent;
             if (!options.hasOwnProperty("new_lines")) options.new_lines = defaults.new_lines;
-            if (!options.hasOwnProperty("quote_content")) options.quote_content = defaults.quote_content;
             if (!options.hasOwnProperty("header")) options.header = defaults.header;
         }
 
@@ -348,7 +378,6 @@ class XMLNode {
             return {
                 indent: 2,
                 header: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-                quote_content: false,
                 new_lines: true
             };
         }
@@ -375,8 +404,7 @@ class XMLNode {
 
             /** Adding the node's value (if it has one) */
             if (node.hasOwnProperty("value")) {
-                if (options.quote_content) xml += "\"" + node.value + "\"";
-                else xml += node.value;
+                xml += node.value;
             }
 
             /** Append a new line, if there are children following this (and if the options allow us to do so) */
