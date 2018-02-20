@@ -52,7 +52,7 @@ json.asXMLString(options, function(err, xml) {
 |:--:|:-----------:|:----------:|
 |indent|Number of spaces prepended on each new level|2|
 |new_lines|Whether new lines shall be used. Set it to false if you want the entire XML string to be on a single line|true|
-|header|A header that is prepended to the entire xml string (e.g. <!DOCTYPE HTML> when you are messing with HTML documents or other important document settings)|<?xml version="1.0" encoding="UTF-8"?>|
+|header|A header that is prepended to the entire xml string (e.g. <!DOCTYPE HTML> when you are messing with HTML documents or other important document settings)|&lt;?xml version="1.0" encoding="UTF-8"?&gt;|
 </center>
 You can of course just leave out the options.
 And it will use the default values.
