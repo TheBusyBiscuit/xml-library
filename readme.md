@@ -29,12 +29,12 @@ XML.parseXML(xml, function(err, json) {
 });
 ```
 
-For help on how to use the 'json' Object, see [XMLNode](#XMLNode)
+For help on how to use the 'json' Object, see [XMLNode](#xmlnode)
 
 #### Parsing JSON
 
 You can also interpret JSON objects back into XML.<br>
-BUT: This JSON object must be an [XMLNode](#XMLNode) Object (more Info down below)
+BUT: This JSON object must be an [XMLNode](#xmlnode) Object (more Info down below)
 
 'options' (if specified) is a simple JSON Object with keys and values. (Missing keys will be inserted with a default value)
 ```javascript
@@ -69,8 +69,8 @@ json.asXMLString(function(err, xml) {
 #### XMLNode
 
 This module adds a class called "XMLNode".<br>
-The JSON Object returned when [Parsing XML](#Parsing-XML) is an instance of this class.<br>
-[Parsing JSON Objects](#Parsing-JSON) also requires an instance of this class.
+The JSON Object returned when [Parsing XML](#parsing-xml) is an instance of this class.<br>
+[Parsing JSON Objects](#parsing-json) also requires an instance of this class.
 
 You can use the class in your node.js Application using
 
@@ -149,8 +149,8 @@ var node new XMLNode("project", {
 
 ##### .addChild(node)
 
-The specified child, must be an instance of [XMLNode](#XMLNode) of course.<br>
-But it can also be an array of [XMLNode](#XMLNode) instances.
+The specified child, must be an instance of [XMLNode](#xmlnode) of course.<br>
+But it can also be an array of [XMLNode](#xmlnode) instances.
 
 ```javascript
 node.addChild(new XMLNode("language", "JavaScript"));
@@ -163,9 +163,9 @@ node.addChild(new XMLNode("language", "JavaScript"));
 
 ##### .setChild(key, node)
 
-The specified child, must be an instance of [XMLNode](#XMLNode) of course.
+The specified child, must be an instance of [XMLNode](#xmlnode) of course.
 Because XML elements can have multiple children with the same name, each child needs to have an index. (e.g. language[0])<br>
-This index will be omitted in the actual XML String when [Parsing JSON Objects](#Parsing-JSON)<br>
+This index will be omitted in the actual XML String when [Parsing JSON Objects](#parsing-json)<br>
 If no index is specified, "[0]" will be appended to the name.
 
 ```javascript
@@ -261,7 +261,7 @@ Here, you can specify an index to target a certain child at a certain point in t
 
 ##### .asXMLString(options, callback)
 
-See [Parsing JSON Objects](#Parsing-JSON)
+See [Parsing JSON Objects](#parsing-json)
 
 ## Copyright / Licensing
 
