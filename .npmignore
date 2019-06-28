@@ -1,2 +1,11 @@
-/tests/*
-test.js
+/test/*
+sonar.json
+analysis.sh
+/.nyc_output/*
+/.scannerwork/*
+/coverage/*
+/lib/sonar.js
+/node_modules/*
+.gitignore
+mocha.json
+renovate.json

@@ -1,15 +1,17 @@
 {
   "name": "xml-library",
-  "version": "0.0.3",
-  "description": "A library that can perform XML > JSON and JSON > XML parsing",
+  "version": "0.1.0",
+  "description": "A library that can perform XML > JSON and JSON > XML parsing (Now with Promises!)",
   "main": "lib/XML.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "mocha test/*.js --reporter mocha-multi-reporters --reporter-options configFile=mocha.json",
+    "code-coverage": "nyc --reporter=lcov --reporter=text-lcov mocha test/*.js",
+    "sonar": "node ./lib/sonar.js"
   },
   "keywords": [
-      "xml",
-      "json",
-      "parser"
+    "xml",
+    "json",
+    "parser"
   ],
   "repository": {
     "type": "git",
@@ -18,6 +20,15 @@
   "author": "TheBusyBiscuit",
   "license": "MIT",
   "bugs": {
-      "url": "https://github.com/TheBusyBiscuit/xml-library/issues"
+    "url": "https://github.com/TheBusyBiscuit/xml-library/issues"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "child-process-promise": "2.2.1",
+    "mocha": "6.1.4",
+    "mocha-multi-reporters": "1.1.7",
+    "mocha-sonarqube-reporter": "1.0.1",
+    "nyc": "14.1.1"
   }
 }

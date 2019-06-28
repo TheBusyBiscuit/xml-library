@@ -1,0 +1,6 @@
+/.nyc_output/*
+/.scannerwork/*
+/coverage/*
+sonar.json
+test/xunit.xml
+/node_modules/*

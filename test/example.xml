@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile>
+	<Name Pseudonym="true">TheBusyBiscuit</Name>
+	<Aliases>
+		<Alias Type="Former">mrCookieSlime</Alias>
+	</Aliases>
+	<Website>https://TheBusyBiscuit.github.io/</Website>
+	<Languages>
+		<Language Type="Real">German</Language>
+		<Language Type="Real">English</Language>
+		<Language Type="Real">Latin</Language>
+	</Languages>
+	<Accounts>
+		<Account Type="Source Sharing">
+			<Name>GitHub</Name>
+			<URL>https://github.com/TheBusyBiscuit</URL>
+		</Account>
+		<Account Type="Video">
+			<Name>YouTube</Name>
+			<URL>https://www.youtube.com/channel/UCNpuxll39TkRJdYVkvgrvgQ</URL>
+		</Account>
+		<Account Type="Social">
+			<Name>Twitter</Name>
+			<URL>https://twitter.com/TheBusyBiscuit</URL>
+		</Account>
+	</Accounts>
+	<DateOfBirth>
+		<Day>26</Day>
+		<Month>October</Month>
+		<Decade>1990s</Decade>
+		<Century>20th</Century>
+		<Era>A.D.</Era>
+	</DateOfBirth>
+	<Programming>
+		<Language Type="Programming">
+			<Name>HTML</Name>
+			<Since>2012</Since>
+		</Language>
+		<Language Type="Programming">
+			<Name>Batch</Name>
+			<Since>2012</Since>
+		</Language>
+		<Language Type="Programming">
+			<Name>Visual Basic</Name>
+			<Since>2012</Since>
+		</Language>
+		<Language Type="Programming">
+			<Name>Java</Name>
+			<Since>2013</Since>
+		</Language>
+		<Language Type="Programming">
+			<Name>Lua</Name>
+			<Since>2013</Since>
+		</Language>
+		<Language Type="Programming">
+			<Name>CSS</Name>
+			<Since>2014</Since>
+		</Language>
+		<Language Type="Programming">
+			<Name>JavaScript</Name>
+			<Since>2014</Since>
+		</Language>
+		<Language Type="Programming">
+			<Name>C#</Name>
+			<Since>2015</Since>
+		</Language>
+		<Language Type="Programming">
+			<Name>Python</Name>
+			<Since>2017</Since>
+		</Language>
+	</Programming>
+</Profile>
